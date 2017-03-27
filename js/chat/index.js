@@ -1,16 +1,30 @@
 var productAnswerType = "products";
 var greetingAnswerType = "greeting";
+var emptyAnswer = "No Products Available";
+var url = 'http://54.208.118.138:10024/api/v1/getHistory/?userId=user1&timeStamp=2017-03-24T07:36:23.529Z';
 
+ loadCSS = function(href) {
+     var cssLink = $("<link rel='stylesheet' type='text/css' href='"+href+"'>");
+     $("head").append(cssLink); 
+ };
 piqChat();
 function piqChat(){
-			setupViewCss();
-	
+	loadCSS("./main.css");
 	console.log("in index.js");
-	$("#chatbot").append("<div class='jumbotron'><h3>In conversation with Fashion Bot</h3></div>");
-	
 
-	var url = 'http://54.208.118.138:10024/api/v1/getHistory/?userId=user1&timeStamp=2017-03-24T07:36:23.529Z';
+	$("#chatbot").append("<div class='jumbotron'>In conversation with Fashion Bot</div>");
+	$("#chatbot").append("<div class='ques_answ_area' id='ques_answ_area'></div>");
+	$("#chatbot").append("<div class='typing_area' id='typing_area'></div>");
+	setupTypingArea();
+	fetchHistory();
 
+};
+
+function setupTypingArea(){
+	$("#typing_area").append("<input type='text' id='typed_message'/>");
+	$("#typing_area").append("<img id='send_button' src='./assets/send.png' height='30px' width='30px'/>")
+};
+function fetchHistory(){
 	$.getJSON( url, function( jsonResData ) {
 		var successFlag = jsonResData.status;
 		if(successFlag === "success") {
@@ -33,7 +47,7 @@ function piqChat(){
 function setupQuestion(questionData){
 	if(null != questionData &&
 		null != questionData.question){
-		$("#chatbot").append("<div class='question_message'>" + questionData.question + "</div>")
+		$("#ques_answ_area").append("<div class='question_message'>" + questionData.question + "</div>");
 }
 };
 
@@ -43,24 +57,15 @@ function setupAnswer(answerData){
 			null != answerData.data){
 			if(answerData.data.length > 0){
 				answerData.data.forEach(function(item){
-					$("#chatbot").append("<div class='answer_data'>" + item.title + "; " + "</div>")
+					$("#ques_answ_area").append("<div class='answer_data'>" + item.title + "; " + "</div>");
 				});
 			}else{
-				$("#chatbot").append("<div class='answer_empty'>" + answerData.message + "</div>")
+				$("#ques_answ_area").append("<div class='answer_empty'>" + emptyAnswer + "</div>");
 			}
 		}else if(answerData.type === greetingAnswerType && 
 			null != answerData.message){
-			$("#chatbot").append("<div class='answer_greeting'>" + answerData.message + "</div>")
+			$("#ques_answ_area").append("<div class='answer_greeting'>" + answerData.message + "</div>");
 		}
 
 	}
-}
-
-function setupViewCss(){
-	$("#jumbotron").css({"text-align":"center", "margin":"2% 20% 2% 20%", "padding":"20px", "border":"2px"});
-	$("#question_message").css({"float":"right"}); 
-	$("#answer_data").css({"float":"left"});  
-	$("#answer_empty").css({"float":"left"});  
-	$("#answer_greeting").css({"float":"left"});  
-
-}
+};

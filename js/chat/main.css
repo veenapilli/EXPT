@@ -1,0 +1,71 @@
+html, body {
+	width:100%;
+	height:100%;
+}
+.container{
+	overflow-y: hidden;
+	overflow-x: hidden;
+}
+.chatbot{
+	height:80%;
+	width: 80%;
+	position:relative;
+	background-color: beige;
+	border: 1px solid black;
+	border-radius: 2px;
+	
+}
+
+.jumbotron{
+	position:absolute;
+	color: orange;
+	width: 100%;
+	height:50px;
+	margin: auto;
+	text-align: center;
+}
+
+.ques_answ_area{
+	position:absolute;
+	width: 100%;
+	top:50px;
+	bottom: 50px;
+	left:0;
+	right: 0;
+	overflow-y: scroll;
+	overflow-x: wrap;
+}
+
+.typing_area{
+	position:absolute;
+	width: 100%;
+	bottom: 0px;
+	height: 50px;
+	left:0;
+	background-color: white;
+}
+
+#send_button{
+	float: right;
+	height: 60%;
+	width: auto;
+}
+#typed_message{
+	float: left;
+	width: 80%;
+	height: 80%;
+}
+.question_message {
+	color: blue;
+	padding: 2px;
+	margin: 4px;
+	float: right;
+	text-align: right;
+	width: 100%;
+}
+.answer_data, .answer_empty, .answer_greeting {
+	color: red;
+	padding: 2px;
+	margin: 4px;
+	float: left;
+}
