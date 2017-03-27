@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Chatbot</string>
+    <string name="start_chat">Start Chat</string>
+    <string name="select_gender">Gender:</string>
+    <string name="select_user">User:</string>
+    <string name="select_client">Client:</string>
+</resources>
