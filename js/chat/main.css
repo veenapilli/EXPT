@@ -1,19 +1,27 @@
 html, body {
-	width:100%;
+	width:80%;
 	height:100%;
+	
 }
-.container{
-	overflow-y: hidden;
-	overflow-x: hidden;
+html {
+    display: table;
+    margin: auto;
 }
-.chatbot{
-	height:80%;
-	width: 80%;
+
+body {
+    display: table-cell;
+    vertical-align: middle;
+
+}
+	.chatbot{
+	height: 90%;
+	width: 100%;
 	position:relative;
 	background-color: beige;
 	border: 1px solid black;
 	border-radius: 2px;
-	
+	display: table;
+	margin: auto;
 }
 
 .jumbotron{
@@ -21,7 +29,6 @@ html, body {
 	color: orange;
 	width: 100%;
 	height:50px;
-	margin: auto;
 	text-align: center;
 }
 
@@ -34,6 +41,7 @@ html, body {
 	right: 0;
 	overflow-y: scroll;
 	overflow-x: wrap;
+
 }
 
 .typing_area{
@@ -41,18 +49,17 @@ html, body {
 	width: 100%;
 	bottom: 0px;
 	height: 50px;
-	left:0;
 	background-color: white;
+	display: flex;
 }
 
 #send_button{
-	float: right;
-	height: 60%;
+	height: 100%;
 	width: auto;
 }
 #typed_message{
-	float: left;
-	width: 80%;
+	margin: auto;
+	width: 90%;
 	height: 80%;
 }
 .question_message {
@@ -62,10 +69,12 @@ html, body {
 	float: right;
 	text-align: right;
 	width: 100%;
+	background-color: white;
 }
 .answer_data, .answer_empty, .answer_greeting {
 	color: red;
 	padding: 2px;
 	margin: 4px;
 	float: left;
+	background-color: white;
 }
