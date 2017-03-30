@@ -4,6 +4,8 @@ var emptyAnswer = "No Products Available";
 var url = 'http://54.208.118.138:10024/api/v1/getHistory/?userId=user1&timeStamp=2017-03-24T07:36:23.529Z';
 var question_url = 'http://54.208.118.138:10024/api/v1/ask/';
 
+var carousel_counter=0;
+var carouselItem ="carousel_";
 /*------------------------------------- Loaders -------------------------------------*/
 
 loadCSS = function(href) {
@@ -24,9 +26,7 @@ piqChat();
 
 function piqChat(){
 	loadCSS("./main.css");
-	loadCSS("//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css");
 	loadJS("https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js");
-	loadJS("//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js");
 
 
 	setupChatArea();
@@ -48,17 +48,14 @@ function setupAnswer(answerData){
 	if(null != answerData && null != answerData.type){
 		if(answerData.type === productAnswerType && 
 			null != answerData.data){
-			if(answerData.data.length > 0){
-				addAnswerData(answerData.data);
-			}else{
-				addEmptyAnswer(emptyAnswer);
-			}
-		}else if(answerData.type === greetingAnswerType && 
-			null != answerData.message){
-			addAnswerMessage(answerData.message);
-		}
-
+			addAnswerData(answerData.data);
+	}else{
+		addEmptyAnswer(emptyAnswer);
 	}
+}else if(answerData.type === greetingAnswerType && 
+	null != answerData.message){
+	addAnswerMessage(answerData.message);
+}
 };
 
 function sendMessage(){
@@ -141,20 +138,25 @@ function setupTypingArea(){
 };
 
 function addQuestion(data){
-	$("#ques_answ_area").append("<div class='question_message'>" + data + "</div>");
+	$("#ques_answ_area").append("<div class='question_message'>" + data + "; " + "</div>");
+
 
 };
 function addAnswerData(data){
-	$('.ques_answ_area').slick({
-		slidesToShow: 3,
-		slidesToScroll: 3
-	});
-	answerData.data.forEach(function(item){
+	if(data.length > 0){
+		var id = carouselItem + carousel_counter;
+		carousel_counter++;
+		$("#ques_answ_area").append("<div id='" + id + "' class='owl-carousel owl-theme'></div>");
+		/*$("#carousel").owlCarousel({
+			loop:true,
+			margin:10,
+			nav:true});*/
 
-		$("#ques_answ_area").slick('slickAdd','<div><h3>' + item.title + '</h3></div>');
-	});
+		data.forEach(function(item){
+			$("#"+id).append("<div class='item'>" + item.title + "</div>");
+		});
+	}
 };
-
 function addEmptyAnswer(data){
 	$("#ques_answ_area").append("<div class='answer_empty'>" + data + "</div>");
 
