@@ -1,8 +1,8 @@
 package com.streamoid.chatbot;
 
-import android.app.Application;
 import android.util.Log;
 
+import com.streamoid.bot.chatsdk.ChatSdkConfig;
 import com.streamoid.bot.chatsdk.external.chat.ChatClient;
 import com.streamoid.bot.chatsdk.external.events.request.RequestCallback;
 import com.streamoid.bot.chatsdk.external.events.request.RequestItem;
@@ -15,7 +15,7 @@ import com.streamoid.bot.chatsdk.misc.Logger;
  * Created by veena on 27/3/17.
  */
 
-public class AppConfig extends Application {
+public class AppConfig extends ChatSdkConfig {
     private String TAG = AppConfig.class.getSimpleName();
 
     @Override
